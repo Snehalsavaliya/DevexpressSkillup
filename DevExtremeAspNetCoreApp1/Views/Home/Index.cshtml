@@ -1,0 +1,59 @@
+@model DevExtremeAspNetCoreApp1.Models.SampleTab
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>Home</h2>
+
+@using (Html.BeginForm())
+{
+    using (Html.DevExtreme().ValidationGroup())
+    {
+        @(Html.DevExtreme().TabPanel()
+    .ID("panel")
+    .Height(260)
+    .SelectedIndex(0)
+    .Loop(true)
+    .AnimationEnabled(true)
+    .DeferRendering(true)
+    .SwipeEnabled(true)
+    .Items(items =>
+    {
+    items.Add()
+            .Title("Tab 1")
+            .Template(@<text>
+            <div class="dx-fieldset">
+                <b>Tab 1 View</b>
+                <hr />
+                <div class="dx-field">
+                    <div class="dx-field-label">
+                        @(Html.DisplayNameFor(model => model.ID))
+                    </div>
+                    <div class="dx-field-value">
+                        @(Html.DevExtreme().TextBoxFor(model => model.ID)
+                                                .ID("txtID")
+                                                .Name("ID")
+                                                .ValidationError(Model.ID)
+                        )
+                        <span asp-validation-for="ID" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            </text>);
+
+       items.Add()
+.Title("Tab 2")
+.Template(@<text>
+    @(Html.Partial("_TabPartial1", Model))
+    </text>);
+
+    items.Add()
+.Title("Tab 3")
+.Template(@<text>
+    @(Html.Partial("_TabPartial2", Model))
+    </text>);
+
+        })
+        .Option("items[0].title", "Tab1")
+    )
+    }
+}
