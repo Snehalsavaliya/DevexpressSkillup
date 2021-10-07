@@ -1,28 +1,45 @@
 ﻿@model DevExtremeAspNetCoreApp1.Models.SampleTab
 
+
 <div class="dx-fieldset">
     <b>Tab 2 View</b>
     <hr />
     <div class="dx-field">
         <div><p>Tab 1 Partial Content</p></div>
-        <div class="dx-field-label">
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </div>
-        <div class="dx-field">
-            <div class="dx-field-value">
-                @(Html.DevExtreme().DateBox()
-                .Type(DateBoxType.DateTime)
-                .Value(DateTime.Now)
-            )
-            </div>
-        </div>
-        <div class="dx-field">
-            <div class="dx-field-label">Checkbox</div>
-            <div class="dx-field-value">
-                @(Html.DevExtreme().CheckBox()
-                    .Value(true)
-                )
-            </div>
-        </div>
+        <div id="longtabs">
+            @using (Html.BeginForm())
+            {
+                using (Html.DevExtreme().ValidationGroup())
+                {
+                    @(Html.DevExtreme().TabPanel()
+    .ID("subpanel")
+    .Height(560)
+    .SelectedIndex(0)
+    .Loop(true)
+    .AnimationEnabled(true)
+    .DeferRendering(true)
+    .SwipeEnabled(true)
+    .Items(items =>
+    {
+
+
+       items.Add()
+.Title("sub tab1")
+.Template(@<text>
+    @(Html.Partial("_TabPartial1_SubTab1", Model))
+    </text>);
+
+        items.Add()
+.Title("sub tab2")
+.Template(@<text>
+    @(Html.Partial("_TabPartial1_SubTab2", Model))
+    </text>);
+        })
+        .Option("items[0].title", "SubTab1")
+        .Option("items[1].title", "SubTab2")
+    )
+                }
+            }
+        </div>    
     </div>
 </div>

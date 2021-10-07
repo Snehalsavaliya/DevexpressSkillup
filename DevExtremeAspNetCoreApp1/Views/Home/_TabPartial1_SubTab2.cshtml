@@ -1,0 +1,10 @@
+﻿@(Html.DevExtreme().Form<DevExtremeAspNetCoreApp1.Models.SampleTab>()
+    .Items(items => {
+
+        items.AddSimpleFor(m => m.ID);
+
+        items.AddSimpleFor(m => m.Text);
+
+        items.AddSimpleFor(m => m.BirthDate);
+    })
+)
