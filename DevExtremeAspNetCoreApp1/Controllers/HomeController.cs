@@ -15,6 +15,11 @@ namespace DevExtremeAspNetCoreApp1.Controllers
             return View(new SampleTab { });
         }
 
+        public IActionResult Grid()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
             return View();
