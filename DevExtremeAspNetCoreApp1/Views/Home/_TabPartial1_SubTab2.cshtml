@@ -1,4 +1,10 @@
-﻿@(Html.DevExtreme().Form<DevExtremeAspNetCoreApp1.Models.SampleTab>()
+﻿<div class="dx-fieldset">
+    <b>Sub Tab 2 View</b>
+    <hr />
+    <div class="dx-field">
+        <div><p>Sub Tab 2 Partial Content</p></div>
+        <div id="longtabs">
+            @(Html.DevExtreme().Form<DevExtremeAspNetCoreApp1.Models.SampleTab>()
     .Items(items => {
 
         items.AddSimpleFor(m => m.ID);
@@ -8,3 +14,6 @@
         items.AddSimpleFor(m => m.BirthDate);
     })
 )
+        </div>
+    </div>
+</div>

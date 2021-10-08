@@ -1,17 +1,18 @@
 @model DevExtremeAspNetCoreApp1.Models.SampleTab
 @{
+
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Home</h2>
-
-@using (Html.BeginForm())
-{
-    using (Html.DevExtreme().ValidationGroup())
+    @using (Html.BeginForm())
     {
-        @(Html.DevExtreme().TabPanel()
+        using (Html.DevExtreme().ValidationGroup())
+        {
+            @(Html.DevExtreme().TabPanel()
     .ID("panel")
-    .Height(560)
     .SelectedIndex(0)
+    .Width("full")
     .Loop(true)
     .AnimationEnabled(true)
     .DeferRendering(true)
@@ -55,5 +56,5 @@
         })
         .Option("items[0].title", "Tab1")
     )
+        }
     }
-}

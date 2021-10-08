@@ -1,20 +1,154 @@
 ﻿@model DevExtremeAspNetCoreApp1.Models.SampleTab
 
 <div class="dx-fieldset">
-    <b>Tab 3 View</b>
-    <hr/>
-    <div class="dx-field">
-        <div><p>Tab 2 Partial Content</p></div>
-        <div class="dx-field-label">
-            @Html.DisplayNameFor(model => model.Text)
+    <b>Basic Information</b>
+    <hr />
+    <a href="#">
+        @(Html.DevExtreme().Button()
+          .Text("New Registration / Correction of mistakes( no modification history remains )")
+          .Type(ButtonType.Danger)
+          )
+    </a>
+    <a href="#">
+        @(Html.DevExtreme().Button()
+          .Text("Change Information registration ( Chnage history is left )")
+          .Type(ButtonType.Danger)
+          )
+    </a>
+    <div id="form">
+        <div>
+            @(Html.DevExtreme().Form<StudentBasicInformation>()
+        .ID("form")
+        .Items(items => {
+
+            items.AddGroup()
+               .CssClass("second-group")
+               .ColCount(2)
+               .Items(groupItems =>
+               {
+                   groupItems.AddGroup().Items(secondGroupItems =>
+                   {
+
+                   });
+                   groupItems.AddGroup().Items(secondGroupItems =>
+                   {
+
+                   });
+
+               });
+
+            items.AddGroup()
+                .CssClass("second-group")
+                .ColCount(3)
+                .Items(groupItems => {
+                    groupItems.AddGroup().Items(secondGroupItems => {
+                        secondGroupItems.AddSimpleFor(m => m.SchoolRegistrationNumber);
+                        secondGroupItems.AddSimpleFor(m => m.LastNameReading);
+                        secondGroupItems.AddSimpleFor(m => m.LastName);
+                        secondGroupItems.AddSimpleFor(m => m.FamilyRegisterSurname);
+                        secondGroupItems.AddSimpleFor(m => m.PrintOnInstructionManual)
+                                .Editor(e => e
+                                    .RadioGroup()
+                                    .Layout(Orientation.Horizontal)
+                                    .DataSource(new[] {
+                                        "Do",
+                                        "Do Not",
+                                        }
+                                    )
+                                    .Value("")
+                                );
+
+                    });
+                    groupItems.AddGroup().Items(secondGroupItems =>
+                    {
+                        secondGroupItems.AddSimpleFor(m => m.Regeneration);
+                        secondGroupItems.AddSimpleFor(m => m.NameReading);
+                        secondGroupItems.AddSimpleFor(m => m.Name);
+                        secondGroupItems.AddSimpleFor(m => m.FamilyRegisterName);
+                        secondGroupItems.AddSimpleFor(m => m.PrintOnSurveyReport)
+                                .Editor(e => e
+                                    .RadioGroup()
+                                    .Layout(Orientation.Horizontal)
+                                    .DataSource(new[] {
+                                        "Do",
+                                        "Do Not",
+                                        }
+                                    )
+                                    .Value("")
+                                );
+
+                    });
+                    
+
+                });
+            items.AddGroup()
+               .CssClass("second-group")
+               .ColCount(1)
+               .Items(groupItems =>
+               {
+                   groupItems.AddGroup().Items(secondGroupItems =>
+                   {
+                       secondGroupItems.AddSimpleFor(m => m.RomajiName);
+                   });
+
+               });
+            items.AddGroup()
+               .CssClass("second-group")
+               .ColCount(2)
+               .Items(groupItems =>
+               {
+                   groupItems.AddGroup().Items(secondGroupItems =>
+                   {
+                       secondGroupItems.AddSimpleFor(m => m.Birthday);
+                       secondGroupItems.AddSimpleFor(m => m.CountryOfCitizenship)
+                            .Editor(e => e
+                                .SelectBox()
+                                .DataSource(new[] {
+                                        "Japan",
+                                        "China",
+                                        "Korea",
+                                        "Taiwan",
+                                        "America",
+                                        "Singapore"
+
+                                    }
+                                )
+                                .Value("")
+                            );
+                       secondGroupItems.AddSimpleFor(m => m.HomePhoneNumber);
+                       secondGroupItems.AddSimpleFor(m => m.PostalCode);
+                       secondGroupItems.AddSimpleFor(m => m.AddressInformation.Address1);
+                       secondGroupItems.AddSimpleFor(m => m.AddressInformation.Address2);
+                       secondGroupItems.AddSimpleFor(m => m.Ms365Id);
+                       secondGroupItems.AddSimpleFor(m => m.EmailAddress);
+                   });
+                   groupItems.AddGroup().Items(secondGroupItems =>
+                   {
+                       secondGroupItems.AddSimpleFor(m => m.Gender)
+                                .Editor(e => e
+                                    .RadioGroup()
+                                    .Layout(Orientation.Horizontal)
+                                    .DataSource(new[] {
+                                        "Male",
+                                        "Female",
+                                        }
+                                    )
+                                    .Value("")
+                                );
+
+                   });
+                   groupItems.AddSimpleFor(m => m.Remarks)
+                        .ColSpan(2)
+                        .Editor(e => e
+                            .TextArea()
+                            .Height(200)
+                        );
+               });
+
+        })
+        .FormData(Model)
+    )
         </div>
-        <div class="dx-field-value">
-            @(Html.DevExtreme().TextBoxFor(model => model.Text)
-                                        .ID("txtText")
-                                        .Name("Text")
-                                        .ValidationError(Model.Text)
-            )
-            <span asp-validation-for="Text" class="text-danger"></span>
-        </div>
+
     </div>
 </div>
